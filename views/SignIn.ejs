@@ -7,6 +7,8 @@
     <title>Sign In - Smart Blog</title>
 </head>
 <body>
+  <%- include('partials/Navbar') %>
+
     <section class="vh-100 d-flex align-items-center" style="background-color: #eee;">
   <div class="container">
     <div class="row justify-content-center">
@@ -16,6 +18,14 @@
             <div class="row align-items-center">
               
               <div class="col-md-6 order-2 order-md-1">
+
+                    <!-- Handel Error of credantioal -->
+                      <% if (locals.error) { %>
+                        <div class="alert alert-danger text-center mb-3" role="alert">
+                          <%= locals.error %>
+                        </div>
+                        <% } %>
+                    <!-- Handel Error of credantioal -->
 
                 <p class="text-center h2 fw-bold mb-4">Sign In</p>
 
@@ -50,6 +60,8 @@
     </div>
   </div>
 </section>
-    <%- include('partials/script') %>
+ 
+  <%- include('partials/script') %>
+
 </body>
 </html>

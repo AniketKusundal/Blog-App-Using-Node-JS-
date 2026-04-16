@@ -1,17 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-       <%- include('partials/start') %>
+<head>
+  <%- include('partials/start') %>
 
-       <meta charset="UTF-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <title>Home Page - Smart Blog</title>
-    </head>
-    <body>
-        <%- include('partials/Navbar') %>
-        <h1 class="">Home Page</h1>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page - Smart Blog</title>
+</head>
 
+<body class="bg-light">
 
-        <%- include('partials/script') %>
-  </body>
+  <%- include('partials/Navbar') %>
+
+  <div class="container mt-4">
+
+    <h2 class="fw-bold mb-4 text-center">All Blogs</h2>
+
+    <div class="row g-4">
+
+      <% Blogs.forEach(blog => { %>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+
+          <div class="card h-100 shadow-sm border-0">
+
+            <!-- Image -->
+            <img 
+              src="<%= blog.coverImgURl %>" 
+              class="card-img-top"
+              style="height: 200px; object-fit: cover;"
+              alt="Blog Image"
+            >
+
+            <div class="card-body d-flex flex-column">
+
+              <!-- Title -->
+              <h5 class="card-title fw-semibold">
+                <%= blog.title %>
+              </h5>
+
+              <!-- Short Description -->
+              <p class="card-text text-muted">
+                <%= blog.description.length > 80 
+                    ? blog.description.substring(0, 80) + "..." 
+                    : blog.description %>
+              </p>
+
+              <!-- Button at Bottom -->
+              <div class="mt-auto">
+                <a href="/blog/<%= blog._id %>" class="btn btn-dark w-100">
+                  Read More
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  </div>
+
+  <%- include('partials/script') %>
+
+</body>
 </html>

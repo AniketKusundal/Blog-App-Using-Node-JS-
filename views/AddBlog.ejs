@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+       <%- include('partials/start') %>
+
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>Add New Blog - Smart Blog</title>
+    </head>
+    <body class="bg-dark text-white"
+    style="background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794') no-repeat center center/cover; min-height: 100vh;">
+        <%- include('partials/Navbar') %>
+        
+      <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-4">
+
+                <h3 class="text-center mb-4">📝 Add New Blog</h3>
+
+                <form action="/blog" method="post" enctype="multipart/form-data">
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Blog Title</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-lg" 
+                            placeholder="Enter blog title"
+                            name="title"
+                            id="title"
+                        >
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea 
+                            class="form-control" 
+                            rows="5" 
+                            placeholder="Write your blog content..."
+                            name="description"
+                            id="description"
+                        ></textarea>
+                    </div>
+
+                    <!-- Cover Image -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Cover Image</label>
+                        <input 
+                            type="file" 
+                            class="form-control"
+                            name="coverImgURl"
+                            id="coverImgURl"
+                        >
+                    </div>
+
+                    <!-- Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark btn-lg">
+                            🚀 Publish Blog
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div>
+    <%- include('partials/script') %>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/start') %>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= blog.title %> - Smart Blog</title>
+</head>
+
+<body class="bg-light">
+
+  <%- include('partials/Navbar') %>
+
+  <div class="container mt-5">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+
+        <div class="card shadow-sm border-0">
+          <div class="row g-0 align-items-center">
+
+            <!-- LEFT: IMAGE -->
+            <% if (blog.coverImgURl) { %>
+            <div class="col-md-5">
+              <img 
+                src="<%= blog.coverImgURl %>" 
+                class="img-fluid rounded-start h-100 w-100"
+                style="object-fit: cover;"
+                alt="Blog Image"
+              >
+            </div>
+            <% } %>
+
+            <!-- RIGHT: CONTENT -->
+            <div class="col-md-7">
+              <div class="card-body p-4">
+
+                <!-- Title -->
+                <h2 class="fw-bold mb-3">
+                  <%= blog.title %>
+                </h2>
+
+                <!-- Meta -->
+                <p class="text-muted small mb-3">
+                  ✍️ <strong><%= blog.createdBy?.FullName || "Unknown" %></strong>
+                  • <%= blog.createdAt.toDateString() %>
+                </p>
+
+                <hr>
+
+                <!-- Description -->
+                <p class="text-secondary lh-lg">
+                  <%= blog.description %>
+                </p>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container mt-5">
+    <img src="<%=blog.createdBy.profilePhoto%>" alt="photo" width="50px" height="50px" style="border-radius: 30px;">
+    <%= blog.createdBy.FullName %>
+  </div>
+
+
+    <div class="container mt-5 shadow-lg mb-5">
+  
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+
+      <!-- Title -->
+      <h4 class="fw-bold mb-3">💬 Comments (<%= comments.length %>)</h4>
+
+      <% if (locals.user) { %>
+        <form  method="POST" action="/blog/comment/<%= blog._id %>">
+        <!-- Input -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Share your opinion</label>
+          <textarea  class="form-control" name="content"  id="content"  rows="3" placeholder="Write your comment here..."></textarea>
+        </div>
+
+        <!-- Button -->
+        <div class="text-end">
+          <button type="submit" class="btn btn-dark px-4">Post Comment</button>
+        </div>
+
+      </form>
+      <% } %>
+      <!-- Form -->
+      
+
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <% comments.forEach(comment => { %>
+        <div>
+            <img src="<%= comment.createdBy.profilePhoto %>" alt="userPhoto" height="50px" width="50px" style="border-radius: 40px;">
+            <%= comment.createdBy.FullName %>
+            <pre><%= comment.content %></pre>
+        </div>
+    <% }) %>
+</div>
+
+  <%- include('partials/script') %>
+
+</body>
+</html>  

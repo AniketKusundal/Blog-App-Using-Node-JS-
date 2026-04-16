@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const { CreateTokenForUser } = require('../services/authantication')
 const router = express.Router()
 
 // all  routes
@@ -29,12 +30,27 @@ router.post('/signup' , async(req , res) => {
 //  Sign In Router 
 router.post('/signin' , async (req , res) => {
     const {email , password} = req.body;
-    const user = await User.matchPassword(email , password)
+    try{
+            const token = await User.matchPasswordCreateToken(email , password)
+            return res.cookie("token" , token).redirect("/")
+        
+        } 
+        catch (error) {
+        console.log(error.message);
 
-    console.log("User" , user);
-    
+        return res.render("SignIn", { 
+            error: error.message   // 👈 use real message
+        });
+            
+        
+    }
 
-     return res.redirect("/")
+    // console.log("token" , token);
+})
+
+
+router.get('/logout' , (req ,res) => {
+    res.clearCookie("token").redirect("/")
 })
 
 
